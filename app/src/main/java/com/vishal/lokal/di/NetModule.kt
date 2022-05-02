@@ -1,6 +1,6 @@
 package com.weather.di
 
-import com.vishal.taghire.api.WazirApi
+import com.vishal.lokal.api.NewsApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -29,11 +29,11 @@ class NetModule {
 
     @Provides
     @Singleton
-    fun provide(retrofit: Retrofit): WazirApi {
-        return retrofit.create(WazirApi::class.java)
+    fun provide(retrofit: Retrofit): NewsApi {
+        return retrofit.create(NewsApi::class.java)
     }
 
     companion object {
-        private const val BASE_URL = "https://api.wazirx.com/sapi/v1/tickers/"
+        private const val BASE_URL = "https://newsapi.org/v2/"
     }
 }

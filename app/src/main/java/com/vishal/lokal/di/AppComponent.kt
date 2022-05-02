@@ -1,6 +1,6 @@
-package com.vishal.taghire.di
+package com.vishal.lokal.di
 
-import com.vishal.taghire.MainActivity
+import com.vishal.lokal.MainActivity
 import com.weather.di.ContextModule
 import com.weather.di.NetModule
 import dagger.Component

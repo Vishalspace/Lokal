@@ -1,8 +1,8 @@
-package com.vishal.taghire
+package com.vishal.lokal
 
 import android.app.Application
-import com.vishal.taghire.di.AppComponent
-import com.vishal.taghire.di.DaggerAppComponent
+import com.vishal.lokal.di.AppComponent
+import com.vishal.lokal.di.DaggerAppComponent
 import com.weather.di.ContextModule
 import com.weather.di.NetModule
 

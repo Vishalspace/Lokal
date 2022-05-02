@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="news"
+            type="com.vishal.lokal.ui.NewsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/llsymbol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/rounded_corner_button"
+        android:elevation="10dp"
+        android:onClick="@{news.onClick}"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:shadowColor="@color/material_dynamic_secondary0"
+        android:shadowRadius="8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/newshigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/newsimage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toTopOf="@id/newstitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/newstitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{news.title}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newsimage"
+                    tools:text="Title" />
+
+                <TextView
+                    android:id="@+id/newspublishedat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{news.publishedAt}"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toTopOf="@id/newshigh"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Time" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/newshigh"
+                app:visibility="@{news.expanded}">
+
+                <TextView
+                    android:id="@+id/newsdescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{news.description}"
+                    app:layout_constraintBottom_toTopOf="@+id/newsurl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="description" />
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/newscontent"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@{news.content}"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/newspublishedat"-->
+                <!--                    tools:text="content" />-->
+
+                <TextView
+                    android:id="@+id/newsurl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:text="Read More.."
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="url" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

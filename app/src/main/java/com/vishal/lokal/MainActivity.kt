@@ -1,14 +1,15 @@
-package com.vishal.taghire
+package com.vishal.lokal
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vishal.taghire.api.WazirApi
-import com.vishal.taghire.databinding.ActivityMainBinding
-import com.vishal.taghire.ui.QuotesAdapter
-import com.vishal.taghire.utils.addTo
-import com.vishal.taghire.utils.convertLongToTime
+import com.vishal.lokal.api.NewsApi
+import com.vishal.lokal.databinding.ActivityMainBinding
+import com.vishal.lokal.ui.NewsAdapter
+import com.vishal.lokal.utils.addTo
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,10 +20,10 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var api: WazirApi
+    lateinit var api: NewsApi
     private lateinit var binding: ActivityMainBinding
     private val compositeDisposable = CompositeDisposable()
-    private val adapter = QuotesAdapter()
+    private val adapter = NewsAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +34,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUi(binding: ActivityMainBinding) {
-        binding.tvat.text = "Fetching data..."
-        binding.currencyrecycler.layoutManager = LinearLayoutManager(this)
-        binding.currencyrecycler.adapter = adapter
+        binding.newsrecycler.layoutManager = LinearLayoutManager(this)
+        binding.newsrecycler.adapter = adapter
         binding.swipeRefreshLayout.setOnRefreshListener {
             callApi()
         }
@@ -62,8 +62,7 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { binding.swipeRefreshLayout.isRefreshing = false }
             .subscribe { result ->
-                adapter.setData(result)
-                binding.tvat.text = convertLongToTime(result.first().at)
+                adapter.submitList(result.articles)
             }.addTo(compositeDisposable)
     }
 
@@ -71,6 +70,24 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         compositeDisposable.clear()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        val search = menu.findItem(R.id.action_search)
+        val searchView = search.actionView as SearchView
+        searchView.queryHint = "Search"
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
+    }
+
 
 }
 

@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/newscard.xml" value="0.35052083333333334" />
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/scripcard.xml" value="0.35052083333333334" />
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/menu/menu.xml" value="0.35052083333333334" />
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/menu/searchable.xml" value="0.35052083333333334" />
         <entry key="..\:/Cache/ADSCode/TagHire/app/src/main/res/drawable/rounded_corner_button.xml" value="0.376" />
-        <entry key="..\:/Cache/ADSCode/TagHire/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Cache/ADSCode/TagHire/app/src/main/res/layout/scripcard.xml" value="0.1" />
+        <entry key="..\:/Cache/ADSCode/TagHire/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Cache/ADSCode/TagHire/app/src/main/res/layout/scripcard.xml" value="0.25" />
       </map>
     </option>
   </component>

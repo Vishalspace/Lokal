@@ -10,31 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
-                android:layout_weight="1"
-                android:text="Updated at "
-                android:textAlignment="center"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tvat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                tools:text="Updating prices" />
-        </LinearLayout>
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
@@ -42,10 +17,10 @@
             android:layout_margin="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/currencyrecycler"
+                android:id="@+id/newsrecycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/scripcard" />
+                tools:listitem="@layout/newscard" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>

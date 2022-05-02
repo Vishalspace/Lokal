@@ -1,10 +1,10 @@
-package com.vishal.taghire.utils
+package com.vishal.lokal.utils
 
 import android.app.Activity
 import android.view.View
 import androidx.databinding.BindingAdapter
-import com.vishal.taghire.App
-import com.vishal.taghire.di.AppComponent
+import com.vishal.lokal.App
+import com.vishal.lokal.di.AppComponent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.text.SimpleDateFormat
