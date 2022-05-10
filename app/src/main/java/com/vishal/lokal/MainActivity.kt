@@ -2,25 +2,25 @@ package com.vishal.lokal
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vishal.lokal.api.NewsApi
+import com.vishal.lokal.api.NewsService
 import com.vishal.lokal.databinding.ActivityMainBinding
 import com.vishal.lokal.ui.NewsAdapter
+import com.vishal.lokal.utils.Logger
 import com.vishal.lokal.utils.addTo
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var api: NewsApi
+    lateinit var newsService: NewsService
     private lateinit var binding: ActivityMainBinding
     private val compositeDisposable = CompositeDisposable()
     private val adapter = NewsAdapter()
@@ -43,24 +43,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        startAutoRefresh()
+        callApi()
     }
 
-    private fun startAutoRefresh() {
-        Observable.interval(0, 4, TimeUnit.SECONDS, Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnEach {
-                if (!binding.swipeRefreshLayout.isRefreshing) callApi()
-            }
-            .subscribe()
-            .addTo(compositeDisposable)
-    }
-
-    private fun callApi() {
-        api.getQuotes()
+    private fun callApi(query: String? = null) {
+        newsService.get(query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { binding.swipeRefreshLayout.isRefreshing = false }
+            .doOnError { e ->
+                logger.error("Error fetching news: q=${query}", e)
+                Toast.makeText(this, "Error fetching news", Toast.LENGTH_SHORT).show()
+            }
             .subscribe { result ->
                 adapter.submitList(result.articles)
             }.addTo(compositeDisposable)
@@ -78,16 +72,21 @@ class MainActivity : AppCompatActivity() {
         searchView.queryHint = "Search"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+                callApi(query)
+                return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
+            override fun onQueryTextChange(query: String?): Boolean {
+                callApi(query)
+                return false
             }
         })
         return super.onCreateOptionsMenu(menu)
     }
 
+    companion object {
+        private val logger = Logger(MainActivity::class.java.name)
+    }
 
 }
 

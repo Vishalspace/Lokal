@@ -1,6 +1,7 @@
 package com.vishal.lokal.utils
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import androidx.databinding.BindingAdapter
 import com.vishal.lokal.App
@@ -35,5 +36,15 @@ fun setVisibility(view: View, visible: Boolean?) {
         true -> View.VISIBLE
         false -> View.GONE
         null -> View.GONE
+    }
+}
+
+class Logger(val name: Any) {
+    fun debug(message: Any) {
+        Log.d(name.toString(), message.toString())
+    }
+
+    fun error(message: Any, error: Throwable? = null) {
+        Log.e(name.toString(), message.toString(), error)
     }
 }
