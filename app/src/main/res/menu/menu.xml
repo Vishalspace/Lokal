@@ -5,8 +5,34 @@
     tools:context=".ui.home.activities.TransactionSearchActivity">
     <item
         android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search"
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
+    <group
+        android:id="@+id/action_filter"
+        android:checkableBehavior="single"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/filter" />
+    <item
+        android:id="@+id/filter_tech"
+        android:title="Tech" />
+    <item
+        android:id="@+id/filter_business"
+        android:title="Business" />
+    <item
+        android:id="@+id/filter_entertainment"
+        android:title="Entertainment" />
+    <item
+        android:id="@+id/filter_general"
+        android:title="General" />
+    <item
+        android:id="@+id/filter_health"
+        android:title="Health" />
+    <item
+        android:id="@+id/filter_science"
+        android:title="Science" />
+    <item
+        android:id="@+id/filter_sports"
+        android:title="Sports" />
 </menu>

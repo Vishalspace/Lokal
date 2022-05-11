@@ -7,12 +7,12 @@ import javax.inject.Inject
 
 class NewsService @Inject constructor(private val context: Context, private val api: NewsApi) {
 
-    fun get(query: String? = null): Single<News> {
-        return if (query.isNullOrBlank()) headlines() else search(query)
+    fun get(query: String? = null, filter: String? = null): Single<News> {
+        return if (query.isNullOrBlank()) headlines(filter) else search(query)
     }
 
-    fun headlines(): Single<News> {
-        return api.getArticles(country(), API_KEY)
+    fun headlines(filter: String? = null): Single<News> {
+        return api.getArticles(country(), filter ?: "", API_KEY)
     }
 
     fun search(query: String): Single<News> {

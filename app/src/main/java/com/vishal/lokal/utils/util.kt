@@ -6,6 +6,7 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import com.vishal.lokal.App
 import com.vishal.lokal.di.AppComponent
+import com.vishal.lokal.model.Article
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import java.text.SimpleDateFormat
@@ -20,14 +21,14 @@ fun Activity.injector(): AppComponent {
     return (application as App).component
 }
 
-fun Long.toHour(): String {
-    return Date(this).hours.toString()
+fun objectToString(article: Article): String {
+    return article.publishedAt
+
 }
 
-fun convertLongToTime(time: Long): String {
-    val date = Date(time)
-    val format = SimpleDateFormat("dd/MMM/yy HH:mm:ss")
-    return format.format(date)
+fun convertToLocalTime(timeString: String): String {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    return (format.parse(timeString) ?: Date()).toLocaleString()
 }
 
 @BindingAdapter("visibility")

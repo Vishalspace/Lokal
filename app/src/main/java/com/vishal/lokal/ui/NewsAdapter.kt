@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vishal.lokal.databinding.NewscardBinding
 import com.vishal.lokal.model.Article
+import com.vishal.lokal.utils.convertToLocalTime
 
 class NewsAdapter : ListAdapter<Article, NewsAdapter.NewsViewHolder>(NewsDiffCallBack()) {
 
@@ -34,7 +35,7 @@ class NewsViewModel(article: Article) {
     val title = ObservableField(article.title)
     val description = ObservableField(article.description)
     val url = ObservableField(article.url)
-    val publishedAt = ObservableField(article.publishedAt)
+    val publishedAt = ObservableField(convertToLocalTime(article.publishedAt))
 
     fun onClick(_view: View?) {
         expanded.set(!expanded.get())

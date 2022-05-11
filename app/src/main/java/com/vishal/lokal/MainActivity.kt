@@ -2,6 +2,7 @@ package com.vishal.lokal
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -46,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         callApi()
     }
 
-    private fun callApi(query: String? = null) {
-        newsService.get(query)
+    private fun callApi(query: String? = null, selectedFilter: String? = null) {
+        newsService.get(query, selectedFilter)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { binding.swipeRefreshLayout.isRefreshing = false }
@@ -67,7 +68,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        val search = menu.findItem(R.id.action_search)
+        initSearchMenu(menu.findItem(R.id.action_search))
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.filter_business -> callApi(selectedFilter = "business")
+            R.id.filter_tech -> callApi(selectedFilter = "technology")
+            R.id.filter_entertainment -> callApi(selectedFilter = "entertainment")
+            R.id.filter_general -> callApi(selectedFilter = "general")
+            R.id.filter_health -> callApi(selectedFilter = "health")
+            R.id.filter_science -> callApi(selectedFilter = "science")
+            R.id.filter_sports -> callApi(selectedFilter = "sports")
+            else -> callApi(selectedFilter = "general")
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun initSearchMenu(search: MenuItem) {
         val searchView = search.actionView as SearchView
         searchView.queryHint = "Search"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -81,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-        return super.onCreateOptionsMenu(menu)
     }
 
     companion object {

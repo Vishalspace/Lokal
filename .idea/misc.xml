@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/drawable/rounded_corner_button.xml" value="0.2075" />
         <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
-        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/newscard.xml" value="0.35052083333333334" />
+        <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/newscard.xml" value="0.25" />
         <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/layout/scripcard.xml" value="0.35052083333333334" />
         <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/menu/menu.xml" value="0.35052083333333334" />
         <entry key="..\:/Cache/ADSCode/Lokal/app/src/main/res/menu/searchable.xml" value="0.35052083333333334" />
